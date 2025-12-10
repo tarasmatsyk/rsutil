@@ -1,6 +1,6 @@
 # Intro
 
-This is an experimental package to expose sysinfo functionality in psutil compatible manner
+This is an experimental package to expose [sysinfo](https://github.com/GuillaumeGomez/sysinfo) functionality in psutil compatible manner
 
 ## How to test
 
