@@ -25,17 +25,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - name: Build rsutil
+      - name: Build rpsutil
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: auto
-      - name: Upload rsutil
+      - name: Upload rpsutil
         uses: actions/upload-artifact@v4
         with:
-          name: rsutil-linux-${{ matrix.platform.target }}
+          name: rpsutil-linux-${{ matrix.platform.target }}
           path: dist
 
   musllinux:
@@ -56,17 +56,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - name: Build rsutil
+      - name: Build rpsutil
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
-      - name: Upload rsutil
+      - name: Upload rpsutil
         uses: actions/upload-artifact@v4
         with:
-          name: rsutil-musllinux-${{ matrix.platform.target }}
+          name: rpsutil-musllinux-${{ matrix.platform.target }}
           path: dist
 
   windows:
@@ -84,16 +84,16 @@ jobs:
         with:
           python-version: 3.x
           architecture: ${{ matrix.platform.target }}
-      - name: Build rsutil
+      - name: Build rpsutil
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      - name: Upload rsutil
+      - name: Upload rpsutil
         uses: actions/upload-artifact@v4
         with:
-          name: rsutil-windows-${{ matrix.platform.target }}
+          name: rpsutil-windows-${{ matrix.platform.target }}
           path: dist
 
   macos:
@@ -110,16 +110,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - name: Build rsutil
+      - name: Build rpsutil
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      - name: Upload rsutil
+      - name: Upload rpsutil
         uses: actions/upload-artifact@v4
         with:
-          name: rsutil-macos-${{ matrix.platform.target }}
+          name: rpsutil-macos-${{ matrix.platform.target }}
           path: dist
 
   sdist:
@@ -134,7 +134,7 @@ jobs:
       - name: Upload sdist
         uses: actions/upload-artifact@v4
         with:
-          name: rsutil-sdist
+          name: rpsutil-sdist
           path: dist
 
   release:
@@ -154,7 +154,7 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: 'rsutil-*/*'
+          subject-path: 'rpsutil-*/*'
       - name: Publish to PyPI
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         uses: PyO3/maturin-action@v1
@@ -162,4 +162,4 @@ jobs:
           MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         with:
           command: upload
-          args: --non-interactive --skip-existing rsutil-*/*
+          args: --non-interactive --skip-existing rpsutil-*/*
